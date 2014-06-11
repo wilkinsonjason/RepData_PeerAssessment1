@@ -1,17 +1,11 @@
-# Reproducible Research Peer Assessment 1
-
-## Loading and preprocessing the data
+## Reproducible Research Peer Assessment 1
 
 ```{r}
 
 setwd("C:/Users/JWilkinson/represearch/RepData_PeerAssessment1")
 df <- read.csv(unz("activity.zip", "activity.csv"))
 df$date<- as.Date(df$date, format = "%Y-%d-%m")
-```
 
-## What is mean total number of steps taken per day?
-
-```{r}
 df2 <- na.omit(df)
 hist(df2$steps, xlab = "Steps", main = "Steps per day", col = "peachpuff")
 smean <- mean(df2$steps)
@@ -22,10 +16,9 @@ legend(x = "topright",c("Mean", "Median"), col = c("blue", "red"), lwd = c(1,1))
 
 ```
 
-
 As can be seen in the histogram above the mean steps per day is `r smean`, and the median is `r smedian`.
 
-## What is the average daily activity pattern?
+
 
 ```{r}
 
@@ -39,11 +32,9 @@ abline(v = maxint, col = "orange")
 
 ```
 
-
-
 As noted in the graph above, interval `r maxint` has the highest average steps at `r maxstep`.
 
-## Imputing missing values
+
 
 ```{r}
 
@@ -69,12 +60,9 @@ legend(x = "topright",c("Mean", "Median"), col = c("blue", "red"), lwd = c(2,2))
 
 ```
 
-
-
 The total rows in our original dataset with NA values is `r totmissing`.  The number of rows of data where dates were recorded but there are NA's for steps values is `r missingsteps`.  It is these rows with dates recorded that will be used going forward with mean for each interval replacing NA values.  The uniform spread of NA's across intervals should minimize the impact of replacement in this manner.  As can be seen in the histogram the new mean is `r smean2` which is nearly the same (less than .3% difference) and the median of `r smedian2` is unchanged.
 
 
-## Are there differences in activity patterns between weekdays and weekends?
 
 
 ```{r}
